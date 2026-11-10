@@ -1,0 +1,9 @@
+[2026-11-10 10:02:58] Starting backup for company_db...
+[2026-11-10 10:02:59] SUCCESS: Backup created at ./backups/company_db_20261110_100258.dump
+[2026-11-10 10:02:59] CLEANUP: Removed backups older than 7 days.
+[2026-11-10 10:05:08] Starting backup for company_db...
+[2026-11-10 10:05:08] SUCCESS: Backup created at ./backups/company_db_20261110_100508.dump
+[2026-11-10 10:05:08] CLEANUP: Removed backups older than 7 days.
+[2026-11-10 10:57:46] Starting backup for company_db...
+[2026-11-10 10:57:46] SUCCESS: Backup created at ./backups/company_db_20261110_105746.dump
+[2026-11-10 10:57:46] CLEANUP: Removed backups older than 7 days.

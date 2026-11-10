@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_lab
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: company_db
+      POSTGRES_USER: postgres_admin
+      POSTGRES_PASSWORD: Password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres_admin -d company_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:v1.7.0
+    container_name: node_exporter
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:v0.15.0
+    container_name: postgres_exporter
+    restart: unless-stopped
+    environment:
+      DATA_SOURCE_NAME: "postgresql://postgres_admin:Password123@postgres:5432/company_db?sslmode=disable"
+    ports:
+      - "9187:9187"
+
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  postgres_data:
+  prometheus_data:
+  grafana_data:
