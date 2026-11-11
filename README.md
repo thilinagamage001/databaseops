@@ -266,6 +266,10 @@ Prometheus scrapes the following targets every `15s` as defined in `prometheus/p
    - **PostgreSQL Overview:** Dashboard ID `9628`
    - **Node Exporter Full:** Dashboard ID `1860`
 
+
+<img width="1867" height="1007" alt="Screenshot From 2026-11-11 08-44-59" src="https://github.com/user-attachments/assets/0364a7a9-7e05-4237-b9ed-192456b66988" />
+
+
 ---
 
 ## 🔍 Performance Tuning & Diagnostic Queries
